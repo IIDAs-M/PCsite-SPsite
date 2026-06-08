@@ -15,18 +15,45 @@ const MOBILE_CSS = `
     line-height: 1.6 !important;
     word-break: break-word !important;
   }
-  img, video, iframe, table {
+  img, video {
     max-width: 100% !important;
     height: auto !important;
   }
-  table { display: block !important; overflow-x: auto !important; }
+  /* テーブルはスクロール可能なコンテナに変換 */
+  table {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: auto !important;
+  }
+  /* テーブルセルの縦書き崩れを防ぐ */
+  td, th {
+    min-width: 2em !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    vertical-align: top !important;
+    padding: 4px 6px !important;
+  }
+  /* ラベル的なセルが縦書きにならないよう最小幅を確保 */
+  td[width], th[width] {
+    width: auto !important;
+    min-width: 4em !important;
+  }
   div, section, article, aside, main, header, footer, nav {
     max-width: 100% !important;
     overflow-x: hidden !important;
   }
+  /* 固定幅の上書き */
   [style*="width"] { max-width: 100% !important; }
+  /* 入力フォームの幅を画面に合わせる */
+  input[type="text"], input[type="password"], input[type="email"],
+  input[type="search"], textarea, select {
+    max-width: 100% !important;
+    width: auto !important;
+  }
   pre, code { white-space: pre-wrap !important; word-break: break-all !important; }
-  /* Prevent fixed/absolute positioned overlays from obscuring content */
+  /* fixed要素がコンテンツを隠すのを防ぐ */
   [style*="position:fixed"], [style*="position: fixed"] {
     position: static !important;
   }
